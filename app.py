@@ -23,5 +23,5 @@ class HealthHandler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     threading.Thread(target=background_worker, daemon=True).start()
-    port = int(os.environ.get("PORT", 8080))
+    port = int(os.environ.get("PORT", 8000))
     HTTPServer(("0.0.0.0", port), HealthHandler).serve_forever()
