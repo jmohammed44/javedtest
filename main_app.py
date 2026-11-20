@@ -7,7 +7,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 
 # --- Configuration (set these as environment variables in Koyeb) ---
-URL_TEMPLATE = os.environ.get("URL_TEMPLATE", "https://{slug}-default-rtdb.firebaseio.com")
+URL_TEMPLATE = os.environ.get("URL_TEMPLATE", "https://{slug}-default-rtdb.firebaseio.com/clients.json")
 
 FIREBASE_BOT_TOKEN = os.environ.get("FIREBASE_BOT_TOKEN", "")
 FIREBASE_CHAT_ID = os.environ.get("FIREBASE_CHAT_ID", "")
@@ -19,7 +19,7 @@ CHECK_INTERVAL = int(os.environ.get("STATUS_INTERVAL", "1000"))
 REQUEST_TIMEOUT = float(os.environ.get("REQUEST_TIMEOUT", "10"))
 REQUEST_DELAY = float(os.environ.get("REQUEST_DELAY", "0.05"))
 MAX_LENGTH = int(os.environ.get("MAX_LENGTH", "0"))  # 0 = unlimited
-
+header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"}
 
 def send_telegram_message(token: str, chat_id: str, text: str) -> None:
     if not token or not chat_id:
@@ -70,7 +70,7 @@ def background_worker():
             count += 1
 
             try:
-                resp = requests.get(target_url, timeout=REQUEST_TIMEOUT)
+                resp = requests.get(target_url, headers=header timeout=REQUEST_TIMEOUT)
                 if not is_dropped_response(resp):
                     send_telegram_message(
                         FIREBASE_BOT_TOKEN,
