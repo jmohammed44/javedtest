@@ -7,7 +7,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 
 # --- Configuration (set these as environment variables in Koyeb) ---
-URL_TEMPLATE = os.environ.get("URL_TEMPLATE", "https://{slug}-default-rtdb.firebaseio.com/clients.json")
+URL_TEMPLATE = os.environ.get("URL_TEMPLATE", "https://example.com/{slug}")
 
 FIREBASE_BOT_TOKEN = os.environ.get("FIREBASE_BOT_TOKEN", "")
 FIREBASE_CHAT_ID = os.environ.get("FIREBASE_CHAT_ID", "")
