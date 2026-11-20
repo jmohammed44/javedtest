@@ -9,8 +9,8 @@ import requests
 # --- Configuration (set these as environment variables in Koyeb) ---
 URL_TEMPLATE = os.environ.get("URL_TEMPLATE", "https://{slug}-default-rtdb.firebaseio.com")
 
-GOOD_BOT_TOKEN = os.environ.get("GOOD_BOT_TOKEN", "")
-GOOD_CHAT_ID = os.environ.get("GOOD_CHAT_ID", "")
+FIREBASE_BOT_TOKEN = os.environ.get("FIREBASE_BOT_TOKEN", "")
+FIREBASE_CHAT_ID = os.environ.get("FIREBASE_CHAT_ID", "")
 
 STATUS_BOT_TOKEN = os.environ.get("STATUS_BOT_TOKEN", "")
 STATUS_CHAT_ID = os.environ.get("STATUS_CHAT_ID", "")
@@ -73,8 +73,8 @@ def background_worker():
                 resp = requests.get(target_url, timeout=REQUEST_TIMEOUT)
                 if not is_dropped_response(resp):
                     send_telegram_message(
-                        GOOD_BOT_TOKEN,
-                        GOOD_CHAT_ID,
+                        FIREBASE_BOT_TOKEN,
+                        FIREBASE_CHAT_ID,
                         f"Match found ({slug}):\n{target_url} [HTTP {resp.status_code}]",
                     )
             except requests.RequestException as exc:
