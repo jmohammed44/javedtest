@@ -70,7 +70,7 @@ def background_worker():
             count += 1
 
             try:
-                resp = requests.get(target_url, headers=header timeout=REQUEST_TIMEOUT)
+                resp = requests.get(target_url, headers=header, timeout=REQUEST_TIMEOUT)
                 if not is_dropped_response(resp):
                     send_telegram_message(
                         FIREBASE_BOT_TOKEN,
